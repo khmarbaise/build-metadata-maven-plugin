@@ -1,0 +1,203 @@
+ ------
+ Usage
+ ------
+ Karl-Heinz Marbaise
+ ------
+ 2013-04-02
+ ------
+
+~~ The MIT License
+~~
+~~ Copyright (c) 2004, The Codehaus
+~~
+~~ Permission is hereby granted, free of charge, to any person obtaining a copy of
+~~ this software and associated documentation files (the "Software"), to deal in
+~~ the Software without restriction, including without limitation the rights to
+~~ use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+~~ of the Software, and to permit persons to whom the Software is furnished to do
+~~ so, subject to the following conditions:
+~~
+~~ The above copyright notice and this permission notice shall be included in all
+~~ copies or substantial portions of the Software.
+~~
+~~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+~~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+~~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+~~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+~~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+~~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+~~ SOFTWARE.
+
+
+Usage
+
+  Brief examples on how to use the Build Meta Data Plugin's goals.
+
+* Retrieve local host name
+
+  The <<<local-hostname>>> goal can be used to load current host name
+
+-------------------
+<project>
+  ...
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-metadata-maven-plugin</artifactId>
+        <version>${project.version}</version>
+        <executions>
+          <execution>
+            <id>get-local-hostname</id>
+            <goals>
+              <goal>hostname</goal>
+            </goals>
+            <configuration>
+              <!-- if not given, 'local.hostname' name is used -->
+              <localHostNameProperty>my.local.hostname</localHostNameProperty>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  ...
+</project>
+-------------------
+
+* Retrieve Operation System Information
+
+  The {{{./os-mojo.html}build-helper:os}} goal can be used to get information about the current
+  operation system. 
+
+-------------------
+<project>
+  ...
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-metadata-maven-plugin</artifactId>
+        <version>${project.version}</version>
+        <executions>
+          <execution>
+            <id>get-os-information</id>
+            <goals>
+              <goal>os</goal>
+            </goals>
+            <configuration>
+              <!-- if not given, 'os' name is used as prefix -->
+              <propertyPrefix>osinformation</propertyPrefix>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  ...
+</project>
+-------------------
+
+  After the goal executes (by default during the <<<validate>>> phase) the following
+  properties will be available.
+
+-------------------
+osinformation.family
+osinformation.name
+osinformation.version
+osinformation.arch
+-------------------
+
+
+* Retrieve Java Information
+
+  The {{{./java-mojo.html}build-helper:java}} goal can be used to get information about the current java 
+  runtime etc.
+
+-------------------
+<project>
+  ...
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-metadata-maven-plugin</artifactId>
+        <version>${project.version}</version>
+        <executions>
+          <execution>
+            <id>get-java-information</id>
+            <goals>
+              <goal>java</goal>
+            </goals>
+            <configuration>
+              <!-- if not given, 'build.environment' name is used as prefix -->
+              <propertyPrefix>build.env</propertyPrefix>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  ...
+</project>
+-------------------
+
+  After the goal executes (by default during the <<<validate>>> phase) the following
+  properties will be available.
+
+-------------------
+build.env.java.vendor
+build.env.java.version
+
+build.env.java.runtime.name
+build.env.java.runtime.version
+
+build.env.java.specification.name
+build.env.java.specification.vendor
+build.env.java.specification.version
+
+build.env.java.vm.name
+build.env.java.vm.info
+build.env.java.vm.vendor
+build.env.java.vm.version
+
+build.env.java.vm.specification.name
+build.env.java.vm.specification.vendor
+build.env.java.vm.specification.version
+
+build.env.sun.management.compiler
+-------------------
+
+* Retrieve Currently logged in user.
+
+  The <<<username>>> goal can be used to get the currently logged in user name.
+
+-------------------
+<project>
+  ...
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-metadata-maven-plugin</artifactId>
+        <version>${project.version}</version>
+        <executions>
+          <execution>
+            <id>get-username</id>
+            <goals>
+              <goal>username</goal>
+            </goals>
+            <configuration>
+              <!-- if not given, 'username' name is used -->
+              <userNameProperty>my.username</userNameProperty>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  ...
+</project>
+-------------------
+
+  []

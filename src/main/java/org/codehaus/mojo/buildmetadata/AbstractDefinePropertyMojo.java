@@ -26,12 +26,18 @@ package org.codehaus.mojo.buildmetadata;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.Properties;
+import java.util.Set;
+import java.util.TreeSet;
 
+import org.apache.maven.artifact.versioning.ArtifactVersion;
 import org.apache.maven.execution.MavenSession;
+import org.apache.maven.execution.RuntimeInformation;
+import org.apache.maven.model.Profile;
 import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.util.Os;
@@ -50,7 +56,13 @@ public abstract class AbstractDefinePropertyMojo
      * The maven session
      */
     @Component
-    protected MavenSession session;
+    private MavenSession session;
+
+    /**
+     * The RuntimeInforamtion for the current instance of Maven.
+     */
+    @Component
+    private RuntimeInformation runtime;
 
     protected void defineProperty( String name, String value )
     {
@@ -107,6 +119,11 @@ public abstract class AbstractDefinePropertyMojo
         return session;
     }
 
+    public RuntimeInformation getRuntime()
+    {
+        return runtime;
+    }
+
     public void definePropertyWithPrefix( Properties properties, String prefix, String name, String value )
     {
         String propName = name;
@@ -136,7 +153,6 @@ public abstract class AbstractDefinePropertyMojo
     }
 
     public void getHostNameProperty( Properties properties, String propertyPrefix )
-        throws MojoExecutionException
     {
 
         try
@@ -145,13 +161,104 @@ public abstract class AbstractDefinePropertyMojo
         }
         catch ( UnknownHostException e )
         {
-            throw new MojoExecutionException( "Unable to retrieve localhost hostname.", e );
+            getLog().error( "Unable to retrieve localhost hostname.", e );
         }
     }
 
     public void getUserNameProperty( Properties properties, String propertyPrefix )
     {
         definePropertyWithPrefix( properties, propertyPrefix, "username", System.getProperty( "user.name" ) );
+    }
+
+    public void getMavenVersionProperty( Properties properties, String propertyPrefix )
+    {
+        ArtifactVersion mavenVersion = getRuntime().getApplicationVersion();
+        definePropertyWithPrefix( properties, propertyPrefix, "version", mavenVersion.toString() );
+
+    }
+
+    public void getMavenActiveProfiles( Properties properties, String propertyPrefix )
+    {
+
+        final List<Profile> profiles = getActiveProfiles();
+
+        if ( profiles == null || profiles.isEmpty() )
+        {
+            return;
+        }
+
+        List<String> profileIds = new ArrayList<String>();
+
+        for ( Profile profile : profiles )
+        {
+            String profileId = profile.getId();
+            if ( !profileIds.contains( profileId ) )
+            {
+                profileIds.add( profileId );
+            }
+        }
+
+        definePropertyWithPrefix( properties, propertyPrefix, "active.profiles",
+                                  StringUtils.join( profileIds.iterator(), "," ) );
+    }
+
+    public void getExecutionProperties( Properties properties, String propertyPrefix )
+    {
+
+        Properties executionProperties = getSession().getExecutionProperties();
+        final Set<Object> sortedKeys = new TreeSet<Object>();
+        sortedKeys.addAll( executionProperties.keySet() );
+        for ( final Object originalKey : sortedKeys )
+        {
+            final String value = executionProperties.getProperty( (String) originalKey );
+            definePropertyWithPrefix( properties, propertyPrefix, "execution.properties." + originalKey, value );
+        }
+
+    }
+
+    public void getMavenGoals( Properties properties, String propertyPrefix )
+    {
+        definePropertyWithPrefix( properties, propertyPrefix, "execution.goals",
+                                  StringUtils.join( getSession().getGoals().iterator(), "," ) );
+
+    }
+
+    public void getMavenOpts( Properties properties, String propertyPrefix )
+    {
+        final String value = getPropertyIfExists( getSession().getExecutionProperties(), "env.MAVEN_OPTS" );
+
+        definePropertyWithPrefix( properties, propertyPrefix, "execution.opts", value );
+
+    }
+
+    public void getMavenCommandLine( Properties properties, String propertyPrefix )
+    {
+        final String value = getPropertyIfExists( getSession().getExecutionProperties(), "env.MAVEN_CMD_LINE_ARGS" );
+
+        definePropertyWithPrefix( properties, propertyPrefix, "execution.cmdline", value );
+    }
+
+    @SuppressWarnings( "unchecked" )
+    public List<Profile> getActiveProfiles()
+    {
+        return (List<Profile>) getProject().getActiveProfiles();
+    }
+
+    public void getJavaOpts( Properties properties, String propertyPrefix )
+    {
+        final String value = getPropertyIfExists( getSession().getExecutionProperties(), "env.JAVA_OPTS" );
+    
+        definePropertyWithPrefix( properties, propertyPrefix, "java.opts", value );
+    
+    }
+
+    public void getMavenProperties( Properties buildEnvironmentProperties, String propertyPrefix )
+    {
+        getMavenVersionProperty( buildEnvironmentProperties, propertyPrefix );
+        getMavenActiveProfiles( buildEnvironmentProperties, propertyPrefix );
+        getMavenGoals( buildEnvironmentProperties, propertyPrefix );
+        getMavenOpts( buildEnvironmentProperties, propertyPrefix );
+        getMavenCommandLine( buildEnvironmentProperties, propertyPrefix );
     }
 
 }

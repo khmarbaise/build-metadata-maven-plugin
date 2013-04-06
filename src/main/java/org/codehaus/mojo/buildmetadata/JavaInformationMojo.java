@@ -74,9 +74,11 @@ public class JavaInformationMojo
 
         Properties buildEnvironmentProperties = new Properties();
 
-        getJavaProperties(buildEnvironmentProperties, propertyPrefix);
+        getJavaProperties( buildEnvironmentProperties, propertyPrefix );
+        getJavaOpts( buildEnvironmentProperties, propertyPrefix );
 
         defineProjectProperty( buildEnvironmentProperties );
 
     }
+
 }

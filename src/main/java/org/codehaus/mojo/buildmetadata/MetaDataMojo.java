@@ -57,11 +57,21 @@ public class MetaDataMojo
 
         Properties buildEnvironmentProperties = new Properties();
 
-        getJavaProperties( buildEnvironmentProperties, propertyPrefix );
-        getOperationSystemProperties( buildEnvironmentProperties, propertyPrefix );
-        getUserNameProperty( buildEnvironmentProperties, propertyPrefix );
+        getBuildEnvironmentProperties( buildEnvironmentProperties, propertyPrefix );
 
         defineProjectProperty( buildEnvironmentProperties );
 
+    }
+
+    public void getBuildEnvironmentProperties( Properties buildEnvironmentProperties, String propertyPrefix )
+    {
+        getJavaProperties( buildEnvironmentProperties, propertyPrefix );
+        getJavaOpts( buildEnvironmentProperties, propertyPrefix );
+
+        getOperationSystemProperties( buildEnvironmentProperties, propertyPrefix );
+        getUserNameProperty( buildEnvironmentProperties, propertyPrefix );
+        getHostNameProperty( buildEnvironmentProperties, propertyPrefix );
+
+        getMavenProperties( buildEnvironmentProperties, propertyPrefix );
     }
 }

@@ -59,12 +59,14 @@ public class MavenMetaDataMojo
     public void execute()
     {
         Properties buildEnvironmentProperties = new Properties();
+        BuildEnvironmentMetaData buildEnvironment =
+            new BuildEnvironmentMetaData( getLog(), getProject(), getSession(), getRuntime(), getDefaultPropertyValue() );
 
-        getMavenProperties( buildEnvironmentProperties, propertyPrefix );
-        //@TODO: Think about making the following call dependent on an option which is false by default. 
-        //getExecutionProperties( buildEnvironmentProperties, propertyPrefix );
+        buildEnvironment.getMavenProperties( buildEnvironmentProperties, propertyPrefix );
+        // @TODO: Think about making the following call dependent on an option which is false by default.
+        // getExecutionProperties( buildEnvironmentProperties, propertyPrefix );
 
-        defineProjectProperty( buildEnvironmentProperties );
+        buildEnvironment.defineProjectProperty( buildEnvironmentProperties );
 
     }
 }

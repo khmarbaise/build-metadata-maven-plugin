@@ -64,10 +64,12 @@ public class OsInformationMojo
     {
 
         Properties buildEnvironmentProperties = new Properties();
+        BuildEnvironmentMetaData buildEnvironment =
+            new BuildEnvironmentMetaData( getLog(), getProject(), getSession(), getRuntime(), getDefaultPropertyValue() );
 
-        getOperationSystemProperties( buildEnvironmentProperties, propertyPrefix );
+        buildEnvironment.getOperationSystemProperties( buildEnvironmentProperties, propertyPrefix );
 
-        defineProjectProperty( buildEnvironmentProperties );
-    
+        buildEnvironment.defineProjectProperty( buildEnvironmentProperties );
+
     }
 }

@@ -35,7 +35,6 @@ import org.apache.maven.plugins.annotations.Parameter;
  * Retrieve current hostname and place it under a configurable project property
  * 
  * @author <a href="kama@soebes.de">Karl-Heinz Marbaise</a>
- * @since 1.9
  */
 @Mojo( name = "hostname", defaultPhase = LifecyclePhase.VALIDATE, threadSafe = true )
 public class HostNameMojo
@@ -56,10 +55,12 @@ public class HostNameMojo
     {
 
         Properties buildEnvironmentProperties = new Properties();
+        BuildEnvironmentMetaData buildEnvironment =
+            new BuildEnvironmentMetaData( getLog(), getProject(), getSession(), getRuntime(), getDefaultPropertyValue() );
 
-        getHostNameProperty( buildEnvironmentProperties, propertyPrefix );
+        buildEnvironment.getHostNameProperty( buildEnvironmentProperties, propertyPrefix );
 
-        defineProjectProperty( buildEnvironmentProperties );
+        buildEnvironment.defineProjectProperty( buildEnvironmentProperties );
 
     }
 }

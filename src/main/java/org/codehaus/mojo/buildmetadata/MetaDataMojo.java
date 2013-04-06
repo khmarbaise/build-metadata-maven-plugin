@@ -35,7 +35,6 @@ import org.apache.maven.plugins.annotations.Parameter;
  * Retrieve current username and place it under a configurable project property
  * 
  * @author <a href="kama@soebes.de">Karl-Heinz Marbaise</a>
- * @since 1.9
  */
 @Mojo( name = "metadata", defaultPhase = LifecyclePhase.VALIDATE, threadSafe = true )
 public class MetaDataMojo
@@ -56,22 +55,20 @@ public class MetaDataMojo
     {
 
         Properties buildEnvironmentProperties = new Properties();
+        BuildEnvironmentMetaData buildEnvironment =
+            new BuildEnvironmentMetaData( getLog(), getProject(), getSession(), getRuntime(), getDefaultPropertyValue() );
 
-        getBuildEnvironmentProperties( buildEnvironmentProperties, propertyPrefix );
+        buildEnvironment.getJavaProperties( buildEnvironmentProperties, propertyPrefix );
+        buildEnvironment.getJavaOpts( buildEnvironmentProperties, propertyPrefix );
 
-        defineProjectProperty( buildEnvironmentProperties );
+        buildEnvironment.getOperationSystemProperties( buildEnvironmentProperties, propertyPrefix );
+        buildEnvironment.getUserNameProperty( buildEnvironmentProperties, propertyPrefix );
+        buildEnvironment.getHostNameProperty( buildEnvironmentProperties, propertyPrefix );
+
+        buildEnvironment.getMavenProperties( buildEnvironmentProperties, propertyPrefix );
+
+        buildEnvironment.defineProjectProperty( buildEnvironmentProperties );
 
     }
 
-    public void getBuildEnvironmentProperties( Properties buildEnvironmentProperties, String propertyPrefix )
-    {
-        getJavaProperties( buildEnvironmentProperties, propertyPrefix );
-        getJavaOpts( buildEnvironmentProperties, propertyPrefix );
-
-        getOperationSystemProperties( buildEnvironmentProperties, propertyPrefix );
-        getUserNameProperty( buildEnvironmentProperties, propertyPrefix );
-        getHostNameProperty( buildEnvironmentProperties, propertyPrefix );
-
-        getMavenProperties( buildEnvironmentProperties, propertyPrefix );
-    }
 }

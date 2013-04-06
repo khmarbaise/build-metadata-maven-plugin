@@ -27,6 +27,8 @@ package org.codehaus.mojo.buildmetadata;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.apache.maven.artifact.versioning.ArtifactVersion;
 import org.apache.maven.execution.RuntimeInformation;
@@ -38,10 +40,16 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.plexus.util.StringUtils;
 
 /**
- * Get maven-metadata which means the version of Maven, the command line the goals which have been used or active
- * profiles etc.
+ * Get maven-metadata which means the version of Maven the active profiles.
  * 
- * @author XXX
+ * <pre>
+ *   [propertyPrefix].version
+ *   [propertyPrefix].profiles
+ *   [propertyPrefix].goals
+ * </pre>
+ * 
+ * @author pgier
+ * @author <a href="codehaus@soebes.de">Karl-Heinz Marbaise</a>
  */
 @Mojo( name = "maven", defaultPhase = LifecyclePhase.VALIDATE, threadSafe = true )
 public class MavenMetaDataMojo
@@ -58,7 +66,7 @@ public class MavenMetaDataMojo
      * The name of the property in which to store the version of Maven.
      */
     @Parameter( defaultValue = "maven" )
-    private String versionProperty;
+    private String propertyPrefix;
 
     /**
      * Main plugin execution
@@ -67,18 +75,25 @@ public class MavenMetaDataMojo
     {
         Properties buildEnvironmentProperties = new Properties();
 
-        getMavenVersionProperty( buildEnvironmentProperties, versionProperty );
-        getActiveProfiles( buildEnvironmentProperties, versionProperty );
-        
+        getMavenVersionProperty( buildEnvironmentProperties, propertyPrefix );
+        getActiveProfiles( buildEnvironmentProperties, propertyPrefix );
+        getGoals( buildEnvironmentProperties, propertyPrefix );
+        getMavenOpts( buildEnvironmentProperties, propertyPrefix );
+        getMavenCommandLine( buildEnvironmentProperties, propertyPrefix );
+        //@TODO: Think about making the following call dependent on an option which is false by default. 
+        getExecutionProperties( buildEnvironmentProperties, propertyPrefix );
+
         defineProjectProperty( buildEnvironmentProperties );
-        
+
     }
 
-    public void getMavenVersionProperty(Properties properties, String propertyPrefix) {
+    public void getMavenVersionProperty( Properties properties, String propertyPrefix )
+    {
         ArtifactVersion mavenVersion = runtime.getApplicationVersion();
         definePropertyWithPrefix( properties, propertyPrefix, "version", mavenVersion.toString() );
-        
+
     }
+
     public void getActiveProfiles( Properties properties, String propertyPrefix )
     {
 
@@ -100,7 +115,44 @@ public class MavenMetaDataMojo
             }
         }
 
-        definePropertyWithPrefix( properties, propertyPrefix, "profiles", StringUtils.join( profileIds.iterator(), "," ) );
+        definePropertyWithPrefix( properties, propertyPrefix, "execution.profiles.active",
+                                  StringUtils.join( profileIds.iterator(), "," ) );
+    }
+
+    public void getExecutionProperties( Properties properties, String propertyPrefix )
+    {
+
+        Properties executionProperties = getSession().getExecutionProperties();
+        final Set<Object> sortedKeys = new TreeSet<Object>();
+        sortedKeys.addAll( executionProperties.keySet() );
+        for ( final Object originalKey : sortedKeys )
+        {
+            final String value = executionProperties.getProperty( (String) originalKey );
+            definePropertyWithPrefix( properties, propertyPrefix, "execution.properties." + originalKey, value );
+        }
+
+    }
+
+    public void getGoals( Properties properties, String propertyPrefix )
+    {
+        definePropertyWithPrefix( properties, propertyPrefix, "execution.goals",
+                                  StringUtils.join( getSession().getGoals().iterator(), "," ) );
+
+    }
+
+    public void getMavenOpts( Properties properties, String propertyPrefix )
+    {
+        final String value = getPropertyIfExists( getSession().getExecutionProperties(), "env.MAVEN_OPTS" );
+
+        definePropertyWithPrefix( properties, propertyPrefix, "execution.opts", value );
+
+    }
+
+    public void getMavenCommandLine( Properties properties, String propertyPrefix )
+    {
+        final String value = getPropertyIfExists( getSession().getExecutionProperties(), "env.MAVEN_CMD_LINE_ARGS" );
+
+        definePropertyWithPrefix( properties, propertyPrefix, "execution.cmdline", value );
     }
 
     @SuppressWarnings( "unchecked" )

@@ -39,6 +39,7 @@ import org.apache.maven.execution.RuntimeInformation;
 import org.apache.maven.model.Profile;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.Component;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.util.Os;
 import org.codehaus.plexus.util.StringUtils;
@@ -63,6 +64,12 @@ public abstract class AbstractDefinePropertyMojo
      */
     @Component
     private RuntimeInformation runtime;
+
+    /**
+     * The default value for undefined properties.
+     */
+    @Parameter( defaultValue = "" )
+    private String defaultPropertyValue;
 
     protected void defineProperty( String name, String value )
     {
@@ -94,8 +101,12 @@ public abstract class AbstractDefinePropertyMojo
     protected String getPropertyIfExists( final Properties properties, final String propertyName )
     {
         final String value = properties.getProperty( propertyName );
-        // @TODO: Think about the value in case of an not defined property? Better suggestions?
-        String result = "";
+        String result = defaultPropertyValue;
+        if ( StringUtils.isBlank( defaultPropertyValue ) )
+        {
+            result = "";
+        }
+
         if ( StringUtils.isNotBlank( value ) )
         {
             result = value;
@@ -247,9 +258,9 @@ public abstract class AbstractDefinePropertyMojo
     public void getJavaOpts( Properties properties, String propertyPrefix )
     {
         final String value = getPropertyIfExists( getSession().getExecutionProperties(), "env.JAVA_OPTS" );
-    
+
         definePropertyWithPrefix( properties, propertyPrefix, "java.opts", value );
-    
+
     }
 
     public void getMavenProperties( Properties buildEnvironmentProperties, String propertyPrefix )

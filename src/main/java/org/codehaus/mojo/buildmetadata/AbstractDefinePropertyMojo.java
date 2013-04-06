@@ -58,6 +58,8 @@ public abstract class AbstractDefinePropertyMojo
     @Parameter( defaultValue = "" )
     private String defaultPropertyValue;
 
+    @Component
+    private BuildEnvironmentMetaData buildEnvironment;    
     /**
      * Get the current project instance.
      * 
@@ -81,6 +83,10 @@ public abstract class AbstractDefinePropertyMojo
     public String getDefaultPropertyValue()
     {
         return defaultPropertyValue;
+    }
+    
+    public BuildEnvironmentMetaData getBuildEnvironment() {
+        return buildEnvironment;
     }
 
 }

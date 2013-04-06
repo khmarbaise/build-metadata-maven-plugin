@@ -57,12 +57,12 @@ public class UserNameMojo
 
         Properties buildEnvironmentProperties = new Properties();
 
-        BuildEnvironmentMetaData buildEnvironment =
-            new BuildEnvironmentMetaData( getLog(), getProject(), getSession(), getRuntime(), getDefaultPropertyValue() );
+//        DefaultBuildEnvironmentMetaData buildEnvironment =
+//            new DefaultBuildEnvironmentMetaData( getLog(), getProject(), getSession(), getRuntime(), getDefaultPropertyValue() );
 
-        buildEnvironment.getUserNameProperty( buildEnvironmentProperties, propertyPrefix );
+        getBuildEnvironment().getUserNameProperty( buildEnvironmentProperties, propertyPrefix );
 
-        buildEnvironment.defineProjectProperty( buildEnvironmentProperties );
+        getBuildEnvironment().defineProjectProperty( buildEnvironmentProperties );
 
     }
 }

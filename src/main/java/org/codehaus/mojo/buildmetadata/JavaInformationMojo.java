@@ -73,13 +73,13 @@ public class JavaInformationMojo
     {
 
         Properties buildEnvironmentProperties = new Properties();
-        BuildEnvironmentMetaData buildEnvironment =
-            new BuildEnvironmentMetaData( getLog(), getProject(), getSession(), getRuntime(), getDefaultPropertyValue() );
+//        DefaultBuildEnvironmentMetaData buildEnvironment =
+//            new DefaultBuildEnvironmentMetaData( getLog(), getProject(), getSession(), getRuntime(), getDefaultPropertyValue() );
 
-        buildEnvironment.getJavaProperties( buildEnvironmentProperties, propertyPrefix );
-        buildEnvironment.getJavaOptsProperties( buildEnvironmentProperties, propertyPrefix );
+        getBuildEnvironment().getJavaProperties( buildEnvironmentProperties, propertyPrefix );
+        getBuildEnvironment().getJavaOptsProperties( buildEnvironmentProperties, propertyPrefix );
 
-        buildEnvironment.defineProjectProperty( buildEnvironmentProperties );
+        getBuildEnvironment().defineProjectProperty( buildEnvironmentProperties );
 
     }
 

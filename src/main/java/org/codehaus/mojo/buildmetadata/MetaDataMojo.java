@@ -55,19 +55,19 @@ public class MetaDataMojo
     {
 
         Properties buildEnvironmentProperties = new Properties();
-        BuildEnvironmentMetaData buildEnvironment =
-            new BuildEnvironmentMetaData( getLog(), getProject(), getSession(), getRuntime(), getDefaultPropertyValue() );
+//        BuildEnvironmentMetaData buildEnvironment =
+//            new BuildEnvironmentMetaData( getLog(), getProject(), getSession(), getRuntime(), getDefaultPropertyValue() );
 
-        buildEnvironment.getJavaProperties( buildEnvironmentProperties, propertyPrefix );
-        buildEnvironment.getJavaOptsProperties( buildEnvironmentProperties, propertyPrefix );
+        getBuildEnvironment().getJavaProperties( buildEnvironmentProperties, propertyPrefix );
+        getBuildEnvironment().getJavaOptsProperties( buildEnvironmentProperties, propertyPrefix );
 
-        buildEnvironment.getOperationSystemProperties( buildEnvironmentProperties, propertyPrefix );
-        buildEnvironment.getUserNameProperty( buildEnvironmentProperties, propertyPrefix );
-        buildEnvironment.getHostNameProperty( buildEnvironmentProperties, propertyPrefix );
+        getBuildEnvironment().getOperationSystemProperties( buildEnvironmentProperties, propertyPrefix );
+        getBuildEnvironment().getUserNameProperty( buildEnvironmentProperties, propertyPrefix );
+        getBuildEnvironment().getHostNameProperty( buildEnvironmentProperties, propertyPrefix );
 
-        buildEnvironment.getMavenProperties( buildEnvironmentProperties, propertyPrefix );
+        getBuildEnvironment().getMavenProperties( buildEnvironmentProperties, propertyPrefix );
 
-        buildEnvironment.defineProjectProperty( buildEnvironmentProperties );
+        getBuildEnvironment().defineProjectProperty( buildEnvironmentProperties );
 
     }
 

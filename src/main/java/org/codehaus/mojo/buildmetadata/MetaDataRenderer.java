@@ -107,35 +107,35 @@ public class MetaDataRenderer
         sink.section1_();
 
         // TODO: Make a report section about build time (start of build!)
-
-        Properties javaProperties = new Properties();
-        getBuildEnvironmentMetaData().getJavaOptsPropertyWithoutPrefix( javaProperties );
-        getBuildEnvironmentMetaData().getJavaPropertiesWithoutPrefix( javaProperties );
-
-        renderJavaRuntime( javaProperties );
-
-        Properties buildServerProperties = new Properties();
-        getBuildEnvironmentMetaData().getHostNamePropertyWithoutPrefix( buildServerProperties );
-        getBuildEnvironmentMetaData().getUserNamePropertyWithoutPrefix( buildServerProperties );
+        Properties mavenProperties = new Properties();
+        getBuildEnvironmentMetaData().getMavenPropertiesWithoutPrefix( mavenProperties );
+        
+        renderMavenInformation( mavenProperties );
+        
 
         sink.section2();
         sink.sectionTitle2();
         sink.text( "Build Server Information" );
         sink.sectionTitle2_();
-
+        
+        Properties buildServerProperties = new Properties();
+        getBuildEnvironmentMetaData().getHostNamePropertyWithoutPrefix( buildServerProperties );
+        getBuildEnvironmentMetaData().getUserNamePropertyWithoutPrefix( buildServerProperties );
+        
         renderSection3( "Username / Host", buildServerProperties );
+
         
         Properties operationSystemProperties = new Properties();
         getBuildEnvironmentMetaData().getOperationSystemPropertiesWithoutPrefix( operationSystemProperties);
-
-        renderSection3( "Operation System", operationSystemProperties );
         
-//        renderBuildServer( buildServerProperties );
+        renderSection3( "Operation System", operationSystemProperties );
 
-        Properties mavenProperties = new Properties();
-        getBuildEnvironmentMetaData().getMavenPropertiesWithoutPrefix( mavenProperties );
+        Properties javaProperties = new Properties();
+        getBuildEnvironmentMetaData().getJavaOptsPropertyWithoutPrefix( javaProperties );
+        getBuildEnvironmentMetaData().getJavaPropertiesWithoutPrefix( javaProperties );
+        renderJavaRuntime( javaProperties );
 
-        renderMavenInformation( mavenProperties );
+
 
     }
 

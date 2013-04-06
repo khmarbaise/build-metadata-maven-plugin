@@ -72,6 +72,9 @@ public class MetaDataReport
     @Component
     private I18N i18n;
 
+    @Component
+    private BuildEnvironmentMetaData buildEnvironment;    
+    
     /**
      * The output directory for the report. Note that this parameter is only evaluated if the goal is run directly from
      * the command line. If the goal is run indirectly as part of a site generation, the output directory configured in
@@ -118,9 +121,8 @@ public class MetaDataReport
     protected void executeReport( Locale locale )
         throws MavenReportException
     {
-        BuildEnvironmentMetaData buildEnvironment =
-            new BuildEnvironmentMetaData( getLog(), project, session, runtime, "" );
-
+//        BuildEnvironmentMetaData buildEnvironment =
+//            new DefaultBuildEnvironmentMetaData( getLog(), project, session, runtime, "" );
         MetaDataRenderer renderer =
             new MetaDataRenderer( getSink(), getOutputName(), getI18n(), locale, buildEnvironment );
         renderer.render();

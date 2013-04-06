@@ -45,7 +45,7 @@ import org.codehaus.plexus.util.StringUtils;
 public class BuildEnvironmentMetaData
 {
     private Log log;
-    
+
     /**
      * The maven project
      */
@@ -65,8 +65,6 @@ public class BuildEnvironmentMetaData
      * The default value for undefined properties.
      */
     private String defaultPropertyValue;
-
-    
 
     public BuildEnvironmentMetaData( Log log, MavenProject project, MavenSession session, RuntimeInformation runtime,
                                      String defaultPropertyValue )
@@ -122,26 +120,6 @@ public class BuildEnvironmentMetaData
         return result;
     }
 
-    /**
-     * Get the current project instance.
-     * 
-     * @return the project
-     */
-    public MavenProject getProject()
-    {
-        return this.project;
-    }
-
-    public MavenSession getSession()
-    {
-        return session;
-    }
-
-    public RuntimeInformation getRuntime()
-    {
-        return runtime;
-    }
-
     public void definePropertyWithPrefix( Properties properties, String prefix, String name, String value )
     {
         String propName = name;
@@ -152,12 +130,22 @@ public class BuildEnvironmentMetaData
         properties.put( propName, value );
     }
 
+    public void getOperationSystemPropertiesWithoutPrefix( Properties properties )
+    {
+        getOperationSystemProperties( properties, null );
+    }
+
     public void getOperationSystemProperties( Properties properties, String propertyPrefix )
     {
         definePropertyWithPrefix( properties, propertyPrefix, "os.name", Os.OS_NAME );
         definePropertyWithPrefix( properties, propertyPrefix, "os.family", Os.OS_FAMILY );
         definePropertyWithPrefix( properties, propertyPrefix, "os.version", Os.OS_VERSION );
         definePropertyWithPrefix( properties, propertyPrefix, "os.arch", Os.OS_ARCH );
+    }
+
+    public void getJavaPropertiesWithoutPrefix( Properties properties )
+    {
+        getJavaProperties( properties, null );
     }
 
     public void getJavaProperties( Properties properties, String propertyPrefix )
@@ -168,6 +156,11 @@ public class BuildEnvironmentMetaData
             definePropertyWithPrefix( properties, propertyPrefix, item.getValue(),
                                       getPropertyIfExists( executionProperties, item.getValue() ) );
         }
+    }
+
+    public void getHostNamePropertyWithoutPrefix( Properties properties )
+    {
+        getHostNameProperty( properties, null );
     }
 
     public void getHostNameProperty( Properties properties, String propertyPrefix )
@@ -181,6 +174,11 @@ public class BuildEnvironmentMetaData
         {
             getLog().error( "Unable to retrieve localhost hostname.", e );
         }
+    }
+
+    public void getUserNamePropertyWithoutPrefix( Properties properties )
+    {
+        getUserNameProperty( properties, null );
     }
 
     public void getUserNameProperty( Properties properties, String propertyPrefix )
@@ -209,7 +207,7 @@ public class BuildEnvironmentMetaData
 
         for ( Profile profile : profiles )
         {
-            //TODO: Add the source of the profile!! like run-its:settings.xml !!
+            // TODO: Add the source of the profile!! like run-its:settings.xml !!
             String profileId = profile.getId();
             if ( !profileIds.contains( profileId ) )
             {
@@ -263,12 +261,22 @@ public class BuildEnvironmentMetaData
         return (List<Profile>) getProject().getActiveProfiles();
     }
 
-    public void getJavaOpts( Properties properties, String propertyPrefix )
+    public void getJavaOptsPropertyWithoutPrefix( Properties properties )
+    {
+        getJavaOptsProperties( properties, null );
+    }
+
+    public void getJavaOptsProperties( Properties properties, String propertyPrefix )
     {
         final String value = getPropertyIfExists( getSession().getExecutionProperties(), "env.JAVA_OPTS" );
 
         definePropertyWithPrefix( properties, propertyPrefix, "java.opts", value );
 
+    }
+
+    public void getMavenPropertiesWithoutPrefix( Properties buildEnvironmentProperties )
+    {
+        getMavenProperties( buildEnvironmentProperties, null );
     }
 
     public void getMavenProperties( Properties buildEnvironmentProperties, String propertyPrefix )
@@ -280,14 +288,29 @@ public class BuildEnvironmentMetaData
         getMavenCommandLine( buildEnvironmentProperties, propertyPrefix );
     }
 
+    /**
+     * Get the current project instance.
+     * 
+     * @return the project
+     */
+    public MavenProject getProject()
+    {
+        return this.project;
+    }
+
+    public MavenSession getSession()
+    {
+        return session;
+    }
+
+    public RuntimeInformation getRuntime()
+    {
+        return runtime;
+    }
+
     public Log getLog()
     {
         return log;
-    }
-
-    public void setLog( Log log )
-    {
-        this.log = log;
     }
 
 }

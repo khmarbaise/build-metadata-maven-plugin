@@ -38,8 +38,6 @@ public class MetaDataRenderer
     extends AbstractMavenReportRenderer
 {
 
-    private static final String NO_PROPERTY_PREFIX = null;
-
     /**
      * The locale we are rendering for.
      */
@@ -111,30 +109,37 @@ public class MetaDataRenderer
         // TODO: Make a report section about build time (start of build!)
 
         Properties javaProperties = new Properties();
-        getBuildEnvironmentMetaData().getJavaOpts( javaProperties, NO_PROPERTY_PREFIX );
-        getBuildEnvironmentMetaData().getJavaProperties( javaProperties, NO_PROPERTY_PREFIX );
+        getBuildEnvironmentMetaData().getJavaOptsPropertyWithoutPrefix( javaProperties );
+        getBuildEnvironmentMetaData().getJavaPropertiesWithoutPrefix( javaProperties );
 
         renderJavaRuntime( javaProperties );
 
         Properties buildServerProperties = new Properties();
-        getBuildEnvironmentMetaData().getHostNameProperty( buildServerProperties, NO_PROPERTY_PREFIX );
-        getBuildEnvironmentMetaData().getUserNameProperty( buildServerProperties, NO_PROPERTY_PREFIX );
-        getBuildEnvironmentMetaData().getOperationSystemProperties( buildServerProperties, NO_PROPERTY_PREFIX );
+        getBuildEnvironmentMetaData().getHostNamePropertyWithoutPrefix( buildServerProperties );
+        getBuildEnvironmentMetaData().getUserNamePropertyWithoutPrefix( buildServerProperties );
 
-        renderBuildServer( buildServerProperties );
+        sink.section2();
+        sink.sectionTitle2();
+        sink.text( "Build Server Information" );
+        sink.sectionTitle2_();
+
+        renderSection3( "Username / Host", buildServerProperties );
+        
+        Properties operationSystemProperties = new Properties();
+        getBuildEnvironmentMetaData().getOperationSystemPropertiesWithoutPrefix( operationSystemProperties);
+
+        renderSection3( "Operation System", operationSystemProperties );
+        
+//        renderBuildServer( buildServerProperties );
 
         Properties mavenProperties = new Properties();
-        getBuildEnvironmentMetaData().getMavenVersionProperty( mavenProperties, NO_PROPERTY_PREFIX );
-        getBuildEnvironmentMetaData().getMavenActiveProfiles( mavenProperties, NO_PROPERTY_PREFIX );
-        getBuildEnvironmentMetaData().getMavenGoals( mavenProperties, NO_PROPERTY_PREFIX );
-        getBuildEnvironmentMetaData().getMavenOpts( mavenProperties, NO_PROPERTY_PREFIX );
-        getBuildEnvironmentMetaData().getMavenOpts( mavenProperties, NO_PROPERTY_PREFIX );
+        getBuildEnvironmentMetaData().getMavenPropertiesWithoutPrefix( mavenProperties );
 
         renderMavenInformation( mavenProperties );
 
     }
 
-    public void renderSection( String sectionTitle, Properties properties )
+    public void renderSection2( String sectionTitle, Properties properties )
     {
         sink.section2();
         sink.sectionTitle2();
@@ -166,19 +171,51 @@ public class MetaDataRenderer
 
     }
 
+    public void renderSection3( String sectionTitle, Properties properties )
+    {
+        sink.section3();
+        sink.sectionTitle3();
+        sink.text( sectionTitle );
+        sink.sectionTitle3_();
+
+        sink.table();
+        sink.tableRow();
+        headerCell( sink, "Field" );
+        headerCell( sink, "Value" );
+        sink.tableRow_();
+
+        @SuppressWarnings( { "unchecked", "rawtypes" } )
+        SortedSet<Object> sortedSet = new TreeSet( properties.keySet() );
+
+        for ( Iterator<Object> iterator = sortedSet.iterator(); iterator.hasNext(); )
+        {
+            String key = (String) iterator.next();
+
+            sink.tableRow();
+            cell( sink, (String) key );
+            cell( sink, (String) properties.getProperty( key ) );
+            sink.tableRow_();
+        }
+
+        sink.table_();
+
+        sink.section3_();
+
+    }
+    
     public void renderJavaRuntime( Properties properties )
     {
-        renderSection( "Java Runtime Information", properties );
+        renderSection2( "Java Runtime Information", properties );
     }
 
     public void renderBuildServer( Properties properties )
     {
-        renderSection( "Build Server Information", properties );
+        renderSection2( "Build Server Information", properties );
     }
 
     public void renderMavenInformation( Properties properties )
     {
-        renderSection( "Maven Information", properties );
+        renderSection2( "Maven Information", properties );
     }
 
     private void cell( Sink sink, String text )

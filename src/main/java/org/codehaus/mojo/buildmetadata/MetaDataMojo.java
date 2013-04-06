@@ -59,7 +59,7 @@ public class MetaDataMojo
             new BuildEnvironmentMetaData( getLog(), getProject(), getSession(), getRuntime(), getDefaultPropertyValue() );
 
         buildEnvironment.getJavaProperties( buildEnvironmentProperties, propertyPrefix );
-        buildEnvironment.getJavaOpts( buildEnvironmentProperties, propertyPrefix );
+        buildEnvironment.getJavaOptsProperties( buildEnvironmentProperties, propertyPrefix );
 
         buildEnvironment.getOperationSystemProperties( buildEnvironmentProperties, propertyPrefix );
         buildEnvironment.getUserNameProperty( buildEnvironmentProperties, propertyPrefix );

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<rss version="0.91">
+  <channel>
+    <title>Build Meta Data Maven Plugin - Checkstyle report</title>
+    <link>https://github.com/khmarbaise/smpp/build-metadata-maven-plugin</link>
+    <description>Build Meta Data Maven Plugin - Checkstyle report</description>
+    <language>en-us</language>
+    <copyright>&#169;2013 SoftwareEntwicklung Beratung Schulung</copyright>
+    <item>
+      <title>File: 11,
+             Errors: 14,
+             Warnings: 50,
+             Infos: 15
+      </title>
+            <link>https://github.com/khmarbaise/smpp/build-metadata-maven-plugin/checkstyle.html</link>
+      <description>
+        <p>Click <a href="https://github.com/khmarbaise/smpp/build-metadata-maven-plugin/checkstyle.html">here</a> for the full Checkstyle report.</p>
+
+        <table summary="Files" boder="1">
+          <thead>
+            <tr>
+              <th>Files</th>
+              <th style="width:30px;"><abbr title="Info">I</abbr></th>
+              <th style="width:30px;"><abbr title="Warning">W</abbr></th>
+              <th style="width:30px;"><abbr title="Error">E</abbr></th>
+            </tr>
+          </thead>
+          <tbody>
+                          <tr>
+                <td>
+                  <a href="https://github.com/khmarbaise/smpp/build-metadata-maven-plugin/checkstyle.html#org.codehaus.mojo.buildmetadata.BuildEnvironmentMetaData.java">org/codehaus/mojo/buildmetadata/BuildEnvironmentMetaData.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  26
+                </td>
+                <td>
+                  2
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/khmarbaise/smpp/build-metadata-maven-plugin/checkstyle.html#org.codehaus.mojo.buildmetadata.OsInformationMojo.java">org/codehaus/mojo/buildmetadata/OsInformationMojo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/khmarbaise/smpp/build-metadata-maven-plugin/checkstyle.html#org.codehaus.mojo.buildmetadata.MetaDataMojo.java">org/codehaus/mojo/buildmetadata/MetaDataMojo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/khmarbaise/smpp/build-metadata-maven-plugin/checkstyle.html#org.codehaus.mojo.buildmetadata.MavenMetaDataMojo.java">org/codehaus/mojo/buildmetadata/MavenMetaDataMojo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/khmarbaise/smpp/build-metadata-maven-plugin/checkstyle.html#org.codehaus.mojo.buildmetadata.HostNameMojo.java">org/codehaus/mojo/buildmetadata/HostNameMojo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/khmarbaise/smpp/build-metadata-maven-plugin/checkstyle.html#org.codehaus.mojo.buildmetadata.MetaDataReport.java">org/codehaus/mojo/buildmetadata/MetaDataReport.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  4
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/khmarbaise/smpp/build-metadata-maven-plugin/checkstyle.html#org.codehaus.mojo.buildmetadata.JavaInformationMojo.java">org/codehaus/mojo/buildmetadata/JavaInformationMojo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/khmarbaise/smpp/build-metadata-maven-plugin/checkstyle.html#org.codehaus.mojo.buildmetadata.JavaEnvironment.java">org/codehaus/mojo/buildmetadata/JavaEnvironment.java</a>
+                </td>
+                <td>
+                  15
+                </td>
+                <td>
+                  1
+                </td>
+                <td>
+                  2
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/khmarbaise/smpp/build-metadata-maven-plugin/checkstyle.html#org.codehaus.mojo.buildmetadata.AbstractDefinePropertyMojo.java">org/codehaus/mojo/buildmetadata/AbstractDefinePropertyMojo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  3
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/khmarbaise/smpp/build-metadata-maven-plugin/checkstyle.html#org.codehaus.mojo.buildmetadata.UserNameMojo.java">org/codehaus/mojo/buildmetadata/UserNameMojo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/khmarbaise/smpp/build-metadata-maven-plugin/checkstyle.html#org.codehaus.mojo.buildmetadata.MetaDataRenderer.java">org/codehaus/mojo/buildmetadata/MetaDataRenderer.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  11
+                </td>
+                <td>
+                  2
+                </td>
+              </tr>
+                      </tbody>
+        </table>
+        
+      </description>
+    </item>
+  </channel>
+</rss>
+

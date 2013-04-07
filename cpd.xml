@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd-cpd>
+<duplication lines="24" tokens="125">
+<file line="147" path="/Users/km/ws-git/build-metadata-maven-plugin/src/main/java/org/codehaus/mojo/buildmetadata/MetaDataRenderer.java"/>
+<file line="179" path="/Users/km/ws-git/build-metadata-maven-plugin/src/main/java/org/codehaus/mojo/buildmetadata/MetaDataRenderer.java"/>
+<codefragment>
+<![CDATA[
+        sink.sectionTitle2_();
+
+        sink.table();
+        sink.tableRow();
+        headerCell( sink, "Field" );
+        headerCell( sink, "Value" );
+        sink.tableRow_();
+
+        @SuppressWarnings( { "unchecked", "rawtypes" } )
+        SortedSet<Object> sortedSet = new TreeSet( properties.keySet() );
+
+        for ( Iterator<Object> iterator = sortedSet.iterator(); iterator.hasNext(); )
+        {
+            String key = (String) iterator.next();
+
+            sink.tableRow();
+            cell( sink, (String) key );
+            cell( sink, (String) properties.getProperty( key ) );
+            sink.tableRow_();
+        }
+
+        sink.table_();
+
+        sink.section2_();
+]]>
+</codefragment>
+</duplication>
+</pmd-cpd>

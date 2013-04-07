@@ -70,7 +70,7 @@ public class MetaDataRenderer
         sink.head();
 
         sink.title();
-        text( "Build metadata Report" );
+        text( getTitle() );
         sink.title_();
 
         sink.head_();
@@ -101,7 +101,7 @@ public class MetaDataRenderer
         sink.section1();
 
         sink.sectionTitle1();
-        sink.text( "Build metadata Report" );
+        sink.text( getTitle() );
         sink.sectionTitle1_();
 
         sink.section1_();
@@ -120,15 +120,15 @@ public class MetaDataRenderer
 
         sink.section2();
         sink.sectionTitle2();
-        sink.text( "Build Server Information" );
+        sink.text( getText( "report.build.server" ) );
         sink.sectionTitle2_();
 
-        renderSection3( "Username / Host", buildServerProperties );
+        renderSection3( getText( "report.build.server.usernamehost" ), buildServerProperties, "build.server" );
         
         Properties operationSystemProperties = new Properties();
         getBuildEnvironmentMetaData().getOperationSystemPropertiesWithoutPrefix( operationSystemProperties);
 
-        renderSection3( "Operation System", operationSystemProperties );
+        renderSection3( getText( "report.build.server.os" ), operationSystemProperties, "operation.system" );
         
 //        renderBuildServer( buildServerProperties );
 
@@ -139,7 +139,7 @@ public class MetaDataRenderer
 
     }
 
-    public void renderSection2( String sectionTitle, Properties properties )
+    public void renderSection2( String sectionTitle, Properties properties, String prefix )
     {
         sink.section2();
         sink.sectionTitle2();
@@ -160,7 +160,7 @@ public class MetaDataRenderer
             String key = (String) iterator.next();
 
             sink.tableRow();
-            cell( sink, (String) key );
+            cell( sink, getText( prefix + "." + (String) key) );
             cell( sink, (String) properties.getProperty( key ) );
             sink.tableRow_();
         }
@@ -171,7 +171,7 @@ public class MetaDataRenderer
 
     }
 
-    public void renderSection3( String sectionTitle, Properties properties )
+    public void renderSection3( String sectionTitle, Properties properties, String prefix )
     {
         sink.section3();
         sink.sectionTitle3();
@@ -192,7 +192,7 @@ public class MetaDataRenderer
             String key = (String) iterator.next();
 
             sink.tableRow();
-            cell( sink, (String) key );
+            cell( sink, getText( prefix + "." + (String) key) );
             cell( sink, (String) properties.getProperty( key ) );
             sink.tableRow_();
         }
@@ -205,17 +205,17 @@ public class MetaDataRenderer
     
     public void renderJavaRuntime( Properties properties )
     {
-        renderSection2( "Java Runtime Information", properties );
+        renderSection2( getText( "report.build.java.runtime" ), properties, "java.runtime" );
     }
 
     public void renderBuildServer( Properties properties )
     {
-        renderSection2( "Build Server Information", properties );
+        renderSection2( "Build Server Information", properties, "build.server" );
     }
 
     public void renderMavenInformation( Properties properties )
     {
-        renderSection2( "Maven Information", properties );
+        renderSection2( getText( "report.build.maven.information" ), properties, "maven" );
     }
 
     private void cell( Sink sink, String text )

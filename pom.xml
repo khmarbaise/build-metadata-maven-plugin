@@ -7,9 +7,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.codehaus.mojo</groupId>
-    <artifactId>mojo-parent</artifactId>
-    <version>31</version>
+    <groupId>com.soebes.smpp</groupId>
+    <artifactId>smpp</artifactId>
+    <version>0.6</version>
   </parent>
 
   <artifactId>build-metadata-maven-plugin</artifactId>
@@ -43,9 +43,9 @@
   </prerequisites>
 
   <scm>
-    <connection>scm:svn:http://svn.codehaus.org/mojo/trunk/mojo/build-metadata-maven-plugin</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/mojo/trunk/mojo/build-metadata-maven-plugin</developerConnection>
-    <url>http://svn.codehaus.org/mojo/trunk/mojo/build-metadata-maven-plugin</url>
+    <connection>scm:git:git@github.com:khmarbaise/build-metadata-maven-plugin.git</connection>
+    <developerConnection>scm:git:git@github.com:khmarbaise/build-metadata-maven-plugin.git</developerConnection>
+    <url>https://github.com/khmarbaise/build-metadata-maven-plugin</url>
   </scm>
   <issueManagement>
     <system>JIRA</system>
@@ -238,6 +238,40 @@
                   <goal>install</goal>
                   <goal>run</goal>
                 </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <!--
+        mvn -Pgithub site
+        will deploy the site to github site.
+       -->
+      <id>github</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.github.github</groupId>
+            <artifactId>site-maven-plugin</artifactId>
+            <version>0.7</version>
+            <configuration>
+              <message>Creating site for ${project.version}</message>
+              <server>github</server>
+              <override>true</override>
+              <includeAttached>true</includeAttached>
+              <server>github</server>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>site</goal>
+                </goals>
+                <phase>site</phase>
               </execution>
             </executions>
           </plugin>

@@ -207,7 +207,7 @@ public class BuildEnvironmentMetaData
 
         for ( Profile profile : profiles )
         {
-            // TODO: Add the source of the profile!! like run-its:settings.xml !!
+            // TODO: Add the source of the profile!! like run-its:settings.xml !! via getSource()
             String profileId = profile.getId();
             if ( !profileIds.contains( profileId ) )
             {

@@ -44,7 +44,7 @@
             </goals>
             <configuration>
               <tasks>
-                <echo>build.environment.hostname=${build.environment.hostname}</echo>
+                <echo>build.hostname=${build.hostname}</echo>
               </tasks>                
             </configuration>
           </execution>

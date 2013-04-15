@@ -31,11 +31,12 @@
 
 Usage
 
-  Brief examples on how to use the Build Meta Data Plugin's goals.
+  Brief examples on how to use the Build Metadata Plugin's goals.
 
 * Retrieve local host name
 
-  The <<<local-hostname>>> goal can be used to load current host name
+  The {{{./os-mojo.html}build-metadata:hostname}} goal can be 
+  used to get a property which contains the current hostname.
 
 -------------------
 <project>
@@ -53,8 +54,8 @@ Usage
               <goal>hostname</goal>
             </goals>
             <configuration>
-              <!-- if not given, 'local.hostname' name is used -->
-              <localHostNameProperty>my.local.hostname</localHostNameProperty>
+              <!-- if not given, 'build.hostname' name is used -->
+              <propertyPrefix>my.local.hostname</propertyPrefix>
             </configuration>
           </execution>
         </executions>
@@ -67,7 +68,7 @@ Usage
 
 * Retrieve Operation System Information
 
-  The {{{./os-mojo.html}build-helper:os}} goal can be used to get information about the current
+  The {{{./os-mojo.html}build-metadata:os}} goal can be used to get information about the current
   operation system. 
 
 -------------------
@@ -111,7 +112,7 @@ osinformation.arch
 
 * Retrieve Java Information
 
-  The {{{./java-mojo.html}build-helper:java}} goal can be used to get information about the current java 
+  The {{{./java-mojo.html}build-metadata:java}} goal can be used to get information about the current java 
   runtime etc.
 
 -------------------
@@ -170,7 +171,9 @@ build.env.sun.management.compiler
 
 * Retrieve Currently logged in user.
 
-  The <<<username>>> goal can be used to get the currently logged in user name.
+  The {{{./username-mojo.html}build-metadata:username}} goal can be used to get the 
+  currently logged in username.  
+
 
 -------------------
 <project>

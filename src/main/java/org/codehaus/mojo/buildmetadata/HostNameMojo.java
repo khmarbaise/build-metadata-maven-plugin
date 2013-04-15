@@ -34,7 +34,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 /**
  * Retrieve current hostname and place it under a configurable project property
  * 
- * @author <a href="kama@soebes.de">Karl-Heinz Marbaise</a>
+ * @author <a href="codehaus@soebes.de">Karl-Heinz Marbaise</a>
  */
 @Mojo( name = "hostname", defaultPhase = LifecyclePhase.VALIDATE, threadSafe = true )
 public class HostNameMojo
@@ -44,7 +44,7 @@ public class HostNameMojo
     /**
      * The name of the property in which to store the local hostname.
      */
-    @Parameter( defaultValue = "build.environment" )
+    @Parameter( defaultValue = "build" )
     private String propertyPrefix;
 
     /**

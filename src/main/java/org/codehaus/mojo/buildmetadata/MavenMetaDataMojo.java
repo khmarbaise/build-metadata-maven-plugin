@@ -48,7 +48,8 @@ public class MavenMetaDataMojo
 {
 
     /**
-     * The name of the property in which to store the version of Maven.
+     * The prefix for the properties will be used to store the Maven 
+     * information.
      */
     @Parameter( defaultValue = "maven" )
     private String propertyPrefix;
@@ -58,6 +59,7 @@ public class MavenMetaDataMojo
      */
     public void execute()
     {
+
         Properties buildEnvironmentProperties = new Properties();
         BuildEnvironmentMetaData buildEnvironment =
             new BuildEnvironmentMetaData( getLog(), getProject(), getSession(), getRuntime(), getDefaultPropertyValue() );

@@ -165,7 +165,6 @@ public class BuildEnvironmentMetaData
 
     public void getHostNameProperty( Properties properties, String propertyPrefix )
     {
-
         try
         {
             definePropertyWithPrefix( properties, propertyPrefix, "hostname", InetAddress.getLocalHost().getHostName() );
@@ -195,7 +194,6 @@ public class BuildEnvironmentMetaData
 
     public void getMavenActiveProfiles( Properties properties, String propertyPrefix )
     {
-
         final List<Profile> profiles = getActiveProfiles();
 
         if ( profiles == null || profiles.isEmpty() )
@@ -208,7 +206,7 @@ public class BuildEnvironmentMetaData
         for ( Profile profile : profiles )
         {
             // TODO: Add the source of the profile!! like run-its:settings.xml !! via getSource()
-            String profileId = profile.getId();
+            String profileId = profile.getId() + ':' + profile.getSource();
             if ( !profileIds.contains( profileId ) )
             {
                 profileIds.add( profileId );
@@ -221,7 +219,6 @@ public class BuildEnvironmentMetaData
 
     public void getExecutionProperties( Properties properties, String propertyPrefix )
     {
-
         Properties executionProperties = getSession().getExecutionProperties();
         final Set<Object> sortedKeys = new TreeSet<Object>();
         sortedKeys.addAll( executionProperties.keySet() );
@@ -230,7 +227,6 @@ public class BuildEnvironmentMetaData
             final String value = executionProperties.getProperty( (String) originalKey );
             definePropertyWithPrefix( properties, propertyPrefix, "execution.properties." + originalKey, value );
         }
-
     }
 
     public void getMavenGoals( Properties properties, String propertyPrefix )

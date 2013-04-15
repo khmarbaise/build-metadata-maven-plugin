@@ -41,13 +41,14 @@ import org.codehaus.plexus.i18n.I18N;
 /**
  * Retrieve current username and place it under a configurable project property
  * 
- * @author <a href="kama@soebes.de">Karl-Heinz Marbaise</a>
+ * @author <a href="codehaus@soebes.de">Karl-Heinz Marbaise</a>
  */
 @Mojo( name = "metadatareport", requiresProject = true, requiresReports = true, defaultPhase = LifecyclePhase.SITE, threadSafe = true )
 public class MetaDataReport
     extends AbstractMavenReport
 {
 
+    private static final String NO_PROPERTY_PREFIX = null;
     /**
      * The maven project
      */
@@ -119,7 +120,7 @@ public class MetaDataReport
         throws MavenReportException
     {
         BuildEnvironmentMetaData buildEnvironment =
-            new BuildEnvironmentMetaData( getLog(), project, session, runtime, "" );
+            new BuildEnvironmentMetaData( getLog(), project, session, runtime, NO_PROPERTY_PREFIX );
 
         MetaDataRenderer renderer =
             new MetaDataRenderer( getSink(), getOutputName(), getI18n(), locale, buildEnvironment );

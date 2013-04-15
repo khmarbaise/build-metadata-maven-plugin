@@ -43,8 +43,7 @@ import org.apache.maven.plugins.annotations.Parameter;
  * 
  * Where the propertyPrefix is the string set in the mojo parameter.
  * 
- * @author <a href="kama@soebes.de">Karl-Heinz Marbaise</a>
- * @since 1.9
+ * @author <a href="codehaus@soebes.de">Karl-Heinz Marbaise</a>
  */
 @Mojo( name = "os", defaultPhase = LifecyclePhase.VALIDATE, threadSafe = true )
 public class OsInformationMojo

@@ -35,7 +35,6 @@ import org.apache.maven.plugins.annotations.Parameter;
  * Retrieve current username and place it under a configurable project property
  * 
  * @author <a href="kama@soebes.de">Karl-Heinz Marbaise</a>
- * @since 1.9
  */
 @Mojo( name = "username", defaultPhase = LifecyclePhase.VALIDATE, threadSafe = true )
 public class UserNameMojo

@@ -24,6 +24,11 @@ package org.codehaus.mojo.buildmetadata;
  * SOFTWARE.
  */
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Properties;
 
 import org.apache.maven.plugin.MojoExecutionException;
@@ -32,9 +37,11 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
 /**
- * Retrieve current username and place it under a configurable project property
+ * Retrieve the metadata Java, Java OPTS, operation system,
+ * maven information and provide it as properties
+ * accessible in the project.
  * 
- * @author <a href="kama@soebes.de">Karl-Heinz Marbaise</a>
+ * @author <a href="codehaus@soebes.de">Karl-Heinz Marbaise</a>
  */
 @Mojo( name = "metadata", defaultPhase = LifecyclePhase.VALIDATE, threadSafe = true )
 public class MetaDataMojo
@@ -46,6 +53,13 @@ public class MetaDataMojo
      */
     @Parameter( defaultValue = "build.metadata" )
     private String propertyPrefix;
+
+    /**
+     * Define the output file which contains the full list
+     * of build environment properties.
+     */
+    @Parameter( defaultValue = "${project.build.directory}/build-properties.xml")
+    private File outputXMLFile;
 
     /**
      * to be called from Maven.
@@ -69,6 +83,20 @@ public class MetaDataMojo
 
         buildEnvironment.defineProjectProperty( buildEnvironmentProperties );
 
+        try {
+            writePropertiesToTextFile(buildEnvironmentProperties);
+        } catch (IOException e) {
+            getLog().error("Problem during wirting of property file", e);
+        }
     }
 
+    public void writePropertiesToTextFile (Properties buildEnvironment) throws IOException {
+        FileOutputStream fos = new FileOutputStream(outputXMLFile);
+        buildEnvironment.store(fos, null);
+    }
+
+    public void writePropertiesToXMLFile(Properties buildEnvironment) throws IOException {
+        FileOutputStream fos = new FileOutputStream(outputXMLFile);
+        buildEnvironment.storeToXML(fos, null);
+    }
 }

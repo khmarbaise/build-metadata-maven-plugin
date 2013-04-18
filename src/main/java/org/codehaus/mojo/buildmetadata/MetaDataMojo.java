@@ -24,11 +24,9 @@ package org.codehaus.mojo.buildmetadata;
  * SOFTWARE.
  */
 
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.Properties;
 
 import org.apache.maven.plugin.MojoExecutionException;
@@ -72,14 +70,7 @@ public class MetaDataMojo
         BuildEnvironmentMetaData buildEnvironment =
             new BuildEnvironmentMetaData( getLog(), getProject(), getSession(), getRuntime(), getDefaultPropertyValue() );
 
-        buildEnvironment.getJavaProperties( buildEnvironmentProperties, propertyPrefix );
-        buildEnvironment.getJavaOptsProperties( buildEnvironmentProperties, propertyPrefix );
-
-        buildEnvironment.getOperationSystemProperties( buildEnvironmentProperties, propertyPrefix );
-        buildEnvironment.getUserNameProperty( buildEnvironmentProperties, propertyPrefix );
-        buildEnvironment.getHostNameProperty( buildEnvironmentProperties, propertyPrefix );
-
-        buildEnvironment.getMavenProperties( buildEnvironmentProperties, propertyPrefix );
+        buildEnvironment.getAllProperties(buildEnvironmentProperties, propertyPrefix);
 
         buildEnvironment.defineProjectProperty( buildEnvironmentProperties );
 

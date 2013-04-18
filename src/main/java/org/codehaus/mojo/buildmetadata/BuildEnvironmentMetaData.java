@@ -284,6 +284,17 @@ public class BuildEnvironmentMetaData
         getMavenCommandLine( buildEnvironmentProperties, propertyPrefix );
     }
 
+    public void getAllProperties ( Properties buildEnvironmentProperties, String propertyPrefix) {
+        getJavaProperties( buildEnvironmentProperties, propertyPrefix );
+        getJavaOptsProperties( buildEnvironmentProperties, propertyPrefix );
+
+        getOperationSystemProperties( buildEnvironmentProperties, propertyPrefix );
+        getUserNameProperty( buildEnvironmentProperties, propertyPrefix );
+        getHostNameProperty( buildEnvironmentProperties, propertyPrefix );
+
+        getMavenProperties( buildEnvironmentProperties, propertyPrefix );
+    }
+
     /**
      * Get the current project instance.
      * 

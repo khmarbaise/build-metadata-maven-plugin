@@ -5,6 +5,12 @@
 
   <modelVersion>4.0.0</modelVersion>
 
+  <parent>
+    <groupId>com.soebes.maven.plugins.test.integration</groupId>
+    <artifactId>parent</artifactId>
+    <version>0.1</version>
+  </parent>
+
   <groupId>org.codehaus.mojo</groupId>
   <artifactId>build-metadata-maven-plugin-report-it</artifactId>
   <version>1.0-SNAPSHOT</version>

@@ -236,9 +236,19 @@
               <execution>
                 <id>integration-test</id>
                 <goals>
-                  <goal>install</goal>
                   <goal>run</goal>
                 </goals>
+              </execution>
+              <execution>
+                <id>pre-integration-tests</id>
+                <goals>
+                  <goal>install</goal>
+                </goals>
+                <configuration>
+                  <extraArtifacts>
+                    <extraArtifact>org.apache.maven.plugins:maven-project-info-reports-plugin:2.6:maven-plugin</extraArtifact>
+                  </extraArtifacts>
+                </configuration>
               </execution>
             </executions>
           </plugin>

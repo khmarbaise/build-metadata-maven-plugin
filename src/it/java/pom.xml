@@ -1,8 +1,7 @@
 <project
   xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
->
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
@@ -12,21 +11,14 @@
 
   <name>build-metadata-maven-plugin-java-it</name>
 
-
   <build>
-
     <defaultGoal>package</defaultGoal>
-
     <plugins>
-
-
       <plugin>
-
         <groupId>@project.groupId@</groupId>
         <artifactId>@project.artifactId@</artifactId>
         <version>@project.version@</version>
         <executions>
-
           <execution>
             <id>java-execution</id>
             <goals>
@@ -35,19 +27,19 @@
           </execution>
         </executions>
       </plugin>
-
       <plugin>
-
-        <artifactId>maven-antrun-plugin</artifactId>
+        <groupId>com.soebes.maven.plugins</groupId>
+        <artifactId>maven-echo-plugin</artifactId>
+        <version>0.1</version>
         <executions>
           <execution>
-            <id>maven-version-os</id>
+            <id>echo-hostname</id>
             <phase>test</phase>
             <goals>
-              <goal>run</goal>
+              <goal>echo</goal>
             </goals>
             <configuration>
-              <tasks>
+              <echos>
                 <echo>build.environment.java.version=${build.environment.java.version}</echo>
                 <echo>build.environment.java.vendor=${build.environment.java.vendor}</echo>
                 <echo>build.environment.java.specification.name=${build.environment.java.specification.name}</echo>
@@ -63,15 +55,11 @@
                 <echo>build.environment.java.vm.specification.vendor=${build.environment.java.vm.specification.vendor}</echo>
                 <echo>build.environment.java.vm.specification.version=${build.environment.java.vm.specification.version}</echo>
                 <echo>build.environment.sun.management.compiler=${build.environment.sun.management.compiler}</echo>
-              </tasks>
+              </echos>
             </configuration>
           </execution>
         </executions>
       </plugin>
-
     </plugins>
-
-
   </build>
-
 </project>

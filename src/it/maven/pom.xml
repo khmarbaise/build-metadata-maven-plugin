@@ -1,28 +1,23 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  
+
   <groupId>org.codehaus.mojo</groupId>
   <artifactId>build-metadata-maven-plugin-maven-it</artifactId>
   <version>1.0-SNAPSHOT</version>
-  
+
   <name>build-metadata-maven-plugin-maven-it</name>
-
-  
   <build>
-    
     <defaultGoal>package</defaultGoal>
-    
     <plugins>
-
-
       <plugin>
-      
-         <groupId>@project.groupId@</groupId>
+        <groupId>@project.groupId@</groupId>
         <artifactId>@project.artifactId@</artifactId>
-        <version>@project.version@</version>      
+        <version>@project.version@</version>
         <executions>
-
           <execution>
             <id>maven-execution</id>
             <goals>
@@ -31,30 +26,26 @@
           </execution>
         </executions>
       </plugin>
-
-       <plugin>
-
-        <artifactId>maven-antrun-plugin</artifactId>        
+      <plugin>
+        <groupId>com.soebes.maven.plugins</groupId>
+        <artifactId>maven-echo-plugin</artifactId>
+        <version>0.1</version>
         <executions>
           <execution>
-            <id>echo-maven</id>
+            <id>echo-hostname</id>
             <phase>test</phase>
             <goals>
-              <goal>run</goal>
+              <goal>echo</goal>
             </goals>
             <configuration>
-              <tasks>
+              <echos>
                 <echo>maven.version=${maven.version}</echo>
                 <echo>maven.profiles=${maven.profiles}</echo>
-              </tasks>                
+              </echos>
             </configuration>
           </execution>
         </executions>
       </plugin>
-
     </plugins>
-    
-    
   </build>
-  
 </project>

@@ -5,5 +5,5 @@ String text = file.getText("utf-8");
 
 assert text =~ /\[DEBUG\] define property build\.hostname = "(.*)"/
 
-assert text.contains("[echo] build.hostname=")
+assert text.contains("[INFO] build.hostname=")
 return true;

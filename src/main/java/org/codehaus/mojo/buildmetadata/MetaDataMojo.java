@@ -41,7 +41,7 @@ import org.apache.maven.plugins.annotations.Parameter;
  * 
  * @author <a href="codehaus@soebes.de">Karl-Heinz Marbaise</a>
  */
-@Mojo( name = "metadata", defaultPhase = LifecyclePhase.VALIDATE, threadSafe = true )
+@Mojo( name = "metadata", defaultPhase = LifecyclePhase.INITIALIZE, threadSafe = true )
 public class MetaDataMojo
     extends AbstractDefinePropertyMojo
 {
@@ -75,6 +75,15 @@ public class MetaDataMojo
         buildEnvironment.defineProjectProperty( buildEnvironmentProperties );
 
         try {
+            File path = outputXMLFile.getParentFile();
+            
+            if (!path.exists()) {
+                path.mkdirs();
+            }
+
+            if (!outputXMLFile.exists()) {
+                outputXMLFile.createNewFile();
+            }
             writePropertiesToTextFile(buildEnvironmentProperties);
         } catch (IOException e) {
             getLog().error("Problem during wirting of property file", e);

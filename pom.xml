@@ -246,6 +246,8 @@
                 </goals>
                 <configuration>
                   <extraArtifacts>
+                    <extraArtifact>org.apache.maven.skins:maven-default-skin:1.0:jar</extraArtifact>
+                    <extraArtifact>com.soebes.maven.plugins:maven-echo-plugin:0.1:maven-plugin</extraArtifact>
                     <extraArtifact>org.apache.maven.plugins:maven-project-info-reports-plugin:2.6:maven-plugin</extraArtifact>
                   </extraArtifacts>
                 </configuration>

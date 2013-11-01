@@ -34,6 +34,11 @@ import org.apache.maven.doxia.sink.Sink;
 import org.apache.maven.reporting.AbstractMavenReportRenderer;
 import org.codehaus.plexus.i18n.I18N;
 
+/**
+ * The renderer.
+ * 
+ * @author Karl-Heinz Marbaise
+ */
 public class MetaDataRenderer
     extends AbstractMavenReportRenderer
 {
@@ -124,13 +129,13 @@ public class MetaDataRenderer
         sink.sectionTitle2_();
 
         renderSection3( getText( "report.build.server.usernamehost" ), buildServerProperties, "build.server" );
-        
+
         Properties operationSystemProperties = new Properties();
-        getBuildEnvironmentMetaData().getOperationSystemPropertiesWithoutPrefix( operationSystemProperties);
+        getBuildEnvironmentMetaData().getOperationSystemPropertiesWithoutPrefix( operationSystemProperties );
 
         renderSection3( getText( "report.build.server.os" ), operationSystemProperties, "operation.system" );
-        
-//        renderBuildServer( buildServerProperties );
+
+        // renderBuildServer( buildServerProperties );
 
         Properties mavenProperties = new Properties();
         getBuildEnvironmentMetaData().getMavenPropertiesWithoutPrefix( mavenProperties );
@@ -160,7 +165,7 @@ public class MetaDataRenderer
             String key = (String) iterator.next();
 
             sink.tableRow();
-            cell( sink, getText( prefix + "." + (String) key) );
+            cell( sink, getText( prefix + "." + (String) key ) );
             cell( sink, (String) properties.getProperty( key ) );
             sink.tableRow_();
         }
@@ -192,7 +197,7 @@ public class MetaDataRenderer
             String key = (String) iterator.next();
 
             sink.tableRow();
-            cell( sink, getText( prefix + "." + (String) key) );
+            cell( sink, getText( prefix + "." + (String) key ) );
             cell( sink, (String) properties.getProperty( key ) );
             sink.tableRow_();
         }
@@ -202,7 +207,7 @@ public class MetaDataRenderer
         sink.section3_();
 
     }
-    
+
     public void renderJavaRuntime( Properties properties )
     {
         renderSection2( getText( "report.build.java.runtime" ), properties, "java.runtime" );

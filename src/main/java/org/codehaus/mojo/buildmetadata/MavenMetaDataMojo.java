@@ -48,14 +48,13 @@ public class MavenMetaDataMojo
 {
 
     /**
-     * The prefix for the properties will be used to store the Maven 
-     * information.
+     * The prefix for the properties will be used to store the Maven information.
      */
     @Parameter( defaultValue = "maven" )
     private String propertyPrefix;
 
-    /**
-     * Main plugin execution
+    /* (non-Javadoc)
+     * @see org.apache.maven.plugin.Mojo#execute()
      */
     public void execute()
     {

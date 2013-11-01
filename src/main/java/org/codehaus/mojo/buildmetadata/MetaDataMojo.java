@@ -35,9 +35,8 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
 /**
- * Retrieve the metadata Java, Java OPTS, operation system,
- * maven information and provide it as properties
- * accessible in the project.
+ * Retrieve the metadata Java, Java OPTS, operation system, maven information and provide it as properties accessible
+ * in the project.
  * 
  * @author <a href="codehaus@soebes.de">Karl-Heinz Marbaise</a>
  */
@@ -53,14 +52,13 @@ public class MetaDataMojo
     private String propertyPrefix;
 
     /**
-     * Define the output file which contains the full list
-     * of build environment properties.
+     * Define the output file which contains the full list of build environment properties.
      */
-    @Parameter( defaultValue = "${project.build.directory}/build-properties.xml")
+    @Parameter( defaultValue = "${project.build.directory}/build-properties.xml" )
     private File outputXMLFile;
 
-    /**
-     * to be called from Maven.
+    /* (non-Javadoc)
+     * @see org.apache.maven.plugin.Mojo#execute()
      */
     public void execute()
         throws MojoExecutionException
@@ -70,33 +68,42 @@ public class MetaDataMojo
         BuildEnvironmentMetaData buildEnvironment =
             new BuildEnvironmentMetaData( getLog(), getProject(), getSession(), getRuntime(), getDefaultPropertyValue() );
 
-        buildEnvironment.getAllProperties(buildEnvironmentProperties, propertyPrefix);
+        buildEnvironment.getAllProperties( buildEnvironmentProperties, propertyPrefix );
 
         buildEnvironment.defineProjectProperty( buildEnvironmentProperties );
 
-        try {
+        try
+        {
             File path = outputXMLFile.getParentFile();
-            
-            if (!path.exists()) {
+
+            if ( !path.exists() )
+            {
                 path.mkdirs();
             }
 
-            if (!outputXMLFile.exists()) {
+            if ( !outputXMLFile.exists() )
+            {
                 outputXMLFile.createNewFile();
             }
-            writePropertiesToTextFile(buildEnvironmentProperties);
-        } catch (IOException e) {
-            getLog().error("Problem during wirting of property file", e);
+            writePropertiesToTextFile( buildEnvironmentProperties );
+        }
+        catch ( IOException e )
+        {
+            getLog().error( "Problem during wirting of property file", e );
         }
     }
 
-    public void writePropertiesToTextFile (Properties buildEnvironment) throws IOException {
-        FileOutputStream fos = new FileOutputStream(outputXMLFile);
-        buildEnvironment.store(fos, null);
+    public void writePropertiesToTextFile( Properties buildEnvironment )
+        throws IOException
+    {
+        FileOutputStream fos = new FileOutputStream( outputXMLFile );
+        buildEnvironment.store( fos, null );
     }
 
-    public void writePropertiesToXMLFile(Properties buildEnvironment) throws IOException {
-        FileOutputStream fos = new FileOutputStream(outputXMLFile);
-        buildEnvironment.storeToXML(fos, null);
+    public void writePropertiesToXMLFile( Properties buildEnvironment )
+        throws IOException
+    {
+        FileOutputStream fos = new FileOutputStream( outputXMLFile );
+        buildEnvironment.storeToXML( fos, null );
     }
 }

@@ -49,6 +49,7 @@ public class MetaDataReport
 {
 
     private static final String NO_PROPERTY_PREFIX = null;
+
     /**
      * The maven project
      */

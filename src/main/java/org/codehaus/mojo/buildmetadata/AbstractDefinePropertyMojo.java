@@ -31,6 +31,10 @@ import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 
+/**
+ * @author Karl-Heinz Marbaise
+ *
+ */
 public abstract class AbstractDefinePropertyMojo
     extends AbstractMojo
 {

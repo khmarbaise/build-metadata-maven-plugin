@@ -47,8 +47,8 @@ public class UserNameMojo
     @Parameter( defaultValue = "build.environment" )
     private String propertyPrefix;
 
-    /**
-     * to be called from Maven.
+    /* (non-Javadoc)
+     * @see org.apache.maven.plugin.Mojo#execute()
      */
     public void execute()
         throws MojoExecutionException

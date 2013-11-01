@@ -42,6 +42,9 @@ import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.util.Os;
 import org.codehaus.plexus.util.StringUtils;
 
+/**
+ * @author Karl-Heinz Marbaise
+ */
 public class BuildEnvironmentMetaData
 {
     private Log log;
@@ -284,7 +287,8 @@ public class BuildEnvironmentMetaData
         getMavenCommandLine( buildEnvironmentProperties, propertyPrefix );
     }
 
-    public void getAllProperties ( Properties buildEnvironmentProperties, String propertyPrefix) {
+    public void getAllProperties( Properties buildEnvironmentProperties, String propertyPrefix )
+    {
         getJavaProperties( buildEnvironmentProperties, propertyPrefix );
         getJavaOptsProperties( buildEnvironmentProperties, propertyPrefix );
 

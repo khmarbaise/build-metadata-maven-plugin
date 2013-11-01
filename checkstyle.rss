@@ -9,7 +9,7 @@
     <copyright>&#169;2013 Codehaus</copyright>
     <item>
       <title>File: 11,
-             Errors: 44,
+             Errors: 8,
              Warnings: 53,
              Infos: 15
       </title>
@@ -38,7 +38,7 @@
                   27
                 </td>
                 <td>
-                  4
+                  1
                 </td>
               </tr>
                           <tr>
@@ -66,7 +66,7 @@
                   3
                 </td>
                 <td>
-                  27
+                  1
                 </td>
               </tr>
                           <tr>
@@ -77,7 +77,7 @@
                   0
                 </td>
                 <td>
-                  0
+                  1
                 </td>
                 <td>
                   1
@@ -133,10 +133,10 @@
                   15
                 </td>
                 <td>
-                  1
+                  0
                 </td>
                 <td>
-                  2
+                  0
                 </td>
               </tr>
                           <tr>
@@ -150,7 +150,7 @@
                   3
                 </td>
                 <td>
-                  1
+                  0
                 </td>
               </tr>
                           <tr>
@@ -178,7 +178,7 @@
                   11
                 </td>
                 <td>
-                  4
+                  0
                 </td>
               </tr>
                       </tbody>

@@ -89,7 +89,7 @@ public class MetaDataMojo
         }
         catch ( IOException e )
         {
-            getLog().error( "Problem during wirting of property file", e );
+            getLog().error( "Problem during writing of property file", e );
         }
     }
 

@@ -41,13 +41,13 @@ public abstract class AbstractDefinePropertyMojo
     /**
      * The maven project
      */
-    @Component
+    @Parameter( defaultValue = "${project}", required = true, readonly = true )
     private MavenProject project;
 
     /**
      * The maven session
      */
-    @Component
+    @Parameter( defaultValue = "${session}", required = true, readonly = true )
     private MavenSession session;
 
     /**

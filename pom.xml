@@ -8,17 +8,17 @@
   <parent>
     <groupId>org.codehaus.mojo</groupId>
     <artifactId>mojo-parent</artifactId>
-    <version>34</version>
+    <version>40</version>
   </parent>
 
   <groupId>com.soebes.maven.plugins</groupId>
   <artifactId>build-metadata-maven-plugin</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>3.0.0-SNAPSHOT</version>
   <packaging>maven-plugin</packaging>
 
   <name>Build Metadata Maven Plugin</name>
   <description>This plugin provides information about the current build environment.</description>
-  <inceptionYear>2013</inceptionYear>
+  <inceptionYear>2016</inceptionYear>
   <licenses>
     <license>
       <name>The MIT License</name>
@@ -43,8 +43,8 @@
   </prerequisites>
 
   <scm>
-    <connection>scm:git:git@github.com:khmarbaise/build-metadata-maven-plugin.git</connection>
-    <developerConnection>scm:git:git@github.com:khmarbaise/build-metadata-maven-plugin.git</developerConnection>
+    <connection>scm:git:https://github.com/khmarbaise/build-metadata-maven-plugin.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/khmarbaise/build-metadata-maven-plugin.git</developerConnection>
     <url>https://github.com/khmarbaise/build-metadata-maven-plugin</url>
   </scm>
 
